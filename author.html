@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Authors - Bookstore</title>
+  <!-- Import Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
+  <style>
+    /* CSS Variables for consistent theming */
+    :root {
+      --primary-color: #4CAF50;
+      --primary-hover: #45a049;
+      --bg-color: #f9f9f9;
+      --white: #ffffff;
+      --text-color: #333;
+      --border-color: #ddd;
+    }
+    
+    /* Fade-in animation for smooth entrance */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Reset default styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+    
+    header {
+      background: linear-gradient(90deg, var(--primary-color), var(--primary-hover));
+      color: var(--white);
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    nav {
+      margin-top: 10px;
+    }
+    
+    nav a {
+      color: var(--white);
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    
+    nav a:hover {
+      text-decoration: underline;
+      color: var(--bg-color);
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 30px;
+      background-color: var(--white);
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      animation: fadeIn 0.8s ease-out forwards;
+    }
+    
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    
+    li {
+      margin: 10px 0;
+      padding: 10px;
+      font-size: 1.1em;
+      border-bottom: 1px solid var(--border-color);
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    
+    li:last-child {
+      border-bottom: none;
+    }
+    
+    li:hover {
+      background-color: #f1f1f1;
+      transform: translateX(5px);
+    }
+    
+    a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: bold;
+    }
+    
+    a:hover {
+      text-decoration: underline;
+    }
+    
+    footer {
+      background: linear-gradient(90deg, var(--primary-color), var(--primary-hover));
+      color: var(--white);
+      text-align: center;
+      padding: 15px;
+      margin-top: 30px;
+      font-size: 0.9em;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      .container {
+        margin: 20px;
+        padding: 20px;
+      }
+      
+      nav a {
+        margin: 0 10px;
+      }
+    }
+    body{
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+    li{
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Authors</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="feedback.html">Feedback</a>
+      <a href="author.html">Authors</a>
+      <a href="oscarawards.html">Oscar Awards</a>
+    </nav>
+  </header>
+  <div class="container">
+    <h1>Famous Authors</h1>
+    <ul>
+      <li><strong>Roald Dahl</strong></li>
+      <li><strong>J.K. Rowling</strong></li>
+      <li><strong>David Walliams</strong></li>
+      <li><strong>Enid Blyton</strong></li>
+      <li><strong>Rick Riordan</strong></li>
+      <li><strong>Beatrix Potter</strong></li>
+      <li><strong>C.S. Lewis</strong></li>
+    </ul>
+  </div>
+  <footer>
+    <p>&copy; Bookstore Enterprise Limited 2025</p>
+  </footer>
+</body>
+</html>
