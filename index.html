@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home - Bookstore</title>
+  <!-- Google Fonts (optional) -->
+  <link href="https://fonts.googleapis.com/css?family=Arial&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+    /* Background Gradient Animation */
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    body {
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(45deg, #ff5f6d, #ffc371, #00c6ff, #0072ff);
+      background-size: 400% 400%;
+      animation: gradientAnimation 15s ease infinite;
+    }
+    header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h3 a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.8em;
+    }
+    header img {
+      max-width: 80px;
+      height: auto;
+    }
+    .search-bar {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+    }
+    .search-bar input {
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      width: 200px;
+      outline: none;
+    }
+    .search-bar button {
+      padding: 10px;
+      margin-left: 5px;
+      border: none;
+      border-radius: 4px;
+      background-color: #fff;
+      color: #333;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    .search-bar button:hover {
+      background-color: #ddd;
+    }
+    /* Saved Cards Button */
+    .saved-cards {
+      margin-top: 10px;
+    }
+    .saved-cards button {
+      padding: 10px 15px;
+      margin: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background-color 0.3s;
+    }
+    .saved-cards button:hover {
+      background-color: #0056b3;
+    }
+    nav {
+      margin-top: 10px;
+    }
+    nav a {
+      margin: 0 15px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #ffeb3b;
+    }
+    /* Global "Go to end of page" Button outside container */
+    #goToEndBtn {
+      display: block;
+      margin: 15px auto;
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background-color 0.3s;
+    }
+    #goToEndBtn:hover {
+      background-color: #0056b3;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    h1.main-title {
+      text-align: center;
+      margin: 20px 0;
+      font-size: 2em;
+      color: #333;
+      text-shadow: 1px 1px 2px #fff;
+    }
+    h2 {
+      margin-top: 40px;
+      margin-bottom: 20px;
+      color: #555;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 5px;
+    }
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .section-heading span.count {
+      font-size: 0.9em;
+      color: #777;
+    }
+    .book-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .book {
+      width: 200px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      overflow: hidden;
+      text-align: center;
+      background: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .book img {
+      max-width: 100%;
+      height: auto;
+    }
+    .book-title {
+      font-size: 1.1em;
+      padding: 10px 0;
+    }
+    .book-price {
+      color: #333;
+      font-weight: bold;
+      padding-bottom: 10px;
+    }
+    .add-to-cart {
+      display: block;
+      width: 100%;
+      background: #4CAF50;
+      color: white;
+      padding: 10px 0;
+      border: none;
+      cursor: pointer;
+    }
+    .add-to-cart:hover {
+      background: #45a049;
+    }
+    .cart {
+      margin-top: 30px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      background: #f9f9f9;
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 0;
+    }
+    .cart-total {
+      text-align: right;
+      font-size: 1.2em;
+      margin-top: 10px;
+    }
+    .checkout-btn {
+      margin-top: 20px;
+      display: none;
+      background-color: #007BFF;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    .checkout-btn:hover {
+      background-color: #0056b3;
+    }
+    /* Remove button styling */
+    .remove-btn {
+      background-color: #d9534f;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      padding: 5px 10px;
+      margin-left: 10px;
+      font-size: 0.9em;
+      transition: background-color 0.3s;
+    }
+    .remove-btn:hover {
+      background-color: #c9302c;
+    }
+    /* "Go to start of page" Button inside container */
+    #goToStartBtn {
+      display: block;
+      margin: 20px auto 10px;
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background-color 0.3s;
+    }
+    #goToStartBtn:hover {
+      background-color: #0056b3;
+    }
+    footer {
+      text-align: center;
+      padding: 15px 0;
+      background-color: #4CAF50;
+      color: white;
+      margin-top: 30px;
+    }
+    footer a {
+      color: white;
+      text-decoration: none;
+      margin: 0 5px;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 600px) {
+      .container {
+        margin: 20px;
+        padding: 20px;
+      }
+      header, footer {
+        padding: 15px;
+      }
+      nav a {
+        margin: 0 10px;
+      }
+    }
+    /* Modal for Saved Cards */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+    }
+    .modal-content {
+      background: white;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 5px;
+      max-width: 500px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      position: relative;
+      text-align: center;
+    }
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #aaa;
+    }
+    .close:hover, .close:focus {
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header with Navigation, Search Bar, and Saved Cards Button -->
+  <header>
+    <div>
+      <h3><a href="home.html">Bookstore</a></h3>
+      <img src="favicon.png" alt="Bookstore">
+    </div>
+    <div class="search-bar">
+      <input type="text" id="search-bar" placeholder="Search for books...">
+      <button onclick="searchBooks()">Search</button>
+    </div>
+    <div class="saved-cards">
+      <button onclick="openSavedCardsModal()">Saved Cards</button>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="feedback.html">Feedback</a>
+      <a href="author.html">Authors</a>
+      <a href="oscarawards.html">Oscar Awards</a>
+    </nav>
+  </header>
+  
+  <!-- Global "Go to end of page" Button (outside container) -->
+  <button id="goToEndBtn" onclick="window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });">
+    Go to end of page
+  </button>
+  
+  <h1 class="main-title">Your Number 1 best rated book shop used by over 1 million people.</h1>
+  <div class="container">
+    <!-- Kids Books Section -->
+    <h2 class="section-heading">
+      <span>Stories and Novels for Kids</span>
+      <span class="count" id="count-kids"></span>
+    </h2>
+    <div class="book-list" id="book-list-kids">
+      <!-- Kids books will be dynamically added here -->
+    </div>
+    
+    <!-- Teen Books Section -->
+    <h2 class="section-heading">
+      <span>Stories and Novels for Teens</span>
+      <span class="count" id="count-teens"></span>
+    </h2>
+    <div class="book-list" id="book-list-teens">
+      <!-- Teen books will be dynamically added here -->
+    </div>
+    
+    <!-- Adult Books Section -->
+    <h2 class="section-heading">
+      <span>Stories and Novels for Adults</span>
+      <span class="count" id="count-adults"></span>
+    </h2>
+    <div class="book-list" id="book-list-adults">
+      <!-- Adult books will be dynamically added here -->
+    </div>
+    
+    <!-- "Go to start of page" Button above Shopping Cart inside container -->
+    <button id="goToStartBtn">Go to start of page</button>
+    
+    <!-- Shopping Cart Section -->
+    <section class="cart">
+      <h2>Your Shopping Cart</h2>
+      <div id="cart">
+        <p>No items in the cart.</p>
+      </div>
+      <div class="cart-total">
+        <span>Total:</span> $<span id="total-price">0.00</span>
+      </div>
+      <button class="checkout-btn" id="checkout-btn" onclick="window.location.href='checkout.html'">
+        Proceed to Checkout
+      </button>
+    </section>
+  </div>
+  <footer>
+    <p>&copy; Bookstore Enterprise Limited 2025</p>
+  </footer>
+  
+  <!-- Modal for Saved Cards -->
+  <div id="savedCardsModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeSavedCardsModal()">&times;</span>
+      <h2>Save Your Card Information</h2>
+      <form id="cardForm">
+        <label for="cardholder">Cardholder Name</label><br>
+        <input type="text" id="cardholder" required><br><br>
+        <label for="cardNumber">Card Number</label><br>
+        <input type="text" id="cardNumber" required><br><br>
+        <label for="expiry">Expiry Date</label><br>
+        <input type="month" id="expiry" required><br><br>
+        <label for="cvv">CVV</label><br>
+        <input type="password" id="cvv" required><br><br>
+        <button type="submit">Save Card</button>
+      </form>
+    </div>
+  </div>
+  
+  <script>
+    // "Go to start of page" button functionality (inside container)
+    document.getElementById("goToStartBtn").addEventListener("click", function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    // --- Books Arrays ---
+    // 100 Kids Books (real titles)
+    const kidsBooks = [
+      { title: "Matilda", price: 8.99 },
+      { title: "Charlie and the Chocolate Factory", price: 9.99 },
+      { title: "James and the Giant Peach", price: 7.99 },
+      { title: "The BFG", price: 8.49 },
+      { title: "Fantastic Mr Fox", price: 7.49 },
+      { title: "The Witches", price: 9.49 },
+      { title: "Danny, the Champion of the World", price: 8.99 },
+      { title: "George's Marvellous Medicine", price: 7.99 },
+      { title: "The Twits", price: 7.99 },
+      { title: "Esio Trot", price: 6.49 },
+      { title: "The Magic Finger", price: 6.99 },
+      { title: "The Enormous Crocodile", price: 6.99 },
+      { title: "The Giraffe and the Pelly and Me", price: 7.99 },
+      { title: "Revolting Rhymes", price: 8.49 },
+      { title: "The Minpins", price: 6.99 },
+      { title: "Charlotte's Web", price: 8.99 },
+      { title: "Alice's Adventures in Wonderland", price: 10.49 },
+      { title: "The Wind in the Willows", price: 8.99 },
+      { title: "The Tale of Peter Rabbit", price: 6.99 },
+      { title: "The Tale of Benjamin Bunny", price: 6.99 },
+      { title: "The Tale of Jemima Puddle-Duck", price: 6.99 },
+      { title: "The Tale of Tom Kitten", price: 6.99 },
+      { title: "The Tale of Samuel Whiskers", price: 6.99 },
+      { title: "Winnie-the-Pooh", price: 8.99 },
+      { title: "The House at Pooh Corner", price: 9.49 },
+      { title: "The Story of Ferdinand", price: 7.99 },
+      { title: "Where the Wild Things Are", price: 9.49 },
+      { title: "Goodnight Moon", price: 8.99 },
+      { title: "Brown Bear, Brown Bear, What Do You See?", price: 7.49 },
+      { title: "The Very Hungry Caterpillar", price: 6.99 },
+      { title: "Curious George", price: 8.99 },
+      { title: "Corduroy", price: 7.99 },
+      { title: "Madeline", price: 7.49 },
+      { title: "Caps for Sale", price: 6.99 },
+      { title: "The Snowy Day", price: 8.99 },
+      { title: "The Polar Express", price: 9.49 },
+      { title: "Green Eggs and Ham", price: 8.49 },
+      { title: "The Cat in the Hat", price: 8.49 },
+      { title: "Oh, the Places You'll Go!", price: 9.49 },
+      { title: "Hop on Pop", price: 8.49 },
+      { title: "One Fish Two Fish Red Fish Blue Fish", price: 8.49 },
+      { title: "The Lorax", price: 8.49 },
+      { title: "Alexander and the Terrible, Horrible, No Good, Very Bad Day", price: 8.99 },
+      { title: "The Day the Crayons Quit", price: 8.49 },
+      { title: "Don't Let the Pigeon Drive the Bus!", price: 7.99 },
+      { title: "Knuffle Bunny", price: 7.49 },
+      { title: "Lost and Found", price: 7.99 },
+      { title: "Lilly's Purple Plastic Purse", price: 8.49 },
+      { title: "Kitten's First Full Moon", price: 7.99 },
+      { title: "Owl at Home", price: 7.49 },
+      { title: "Frog and Toad Are Friends", price: 7.99 },
+      { title: "Frog and Toad Together", price: 7.99 },
+      { title: "Little Bear", price: 7.49 },
+      { title: "The Runaway Bunny", price: 8.49 },
+      { title: "Make Way for Ducklings", price: 8.99 },
+      { title: "The Very Quiet Cricket", price: 7.49 },
+      { title: "The Grouchy Ladybug", price: 7.99 },
+      { title: "The Mixed-Up Chameleon", price: 8.49 },
+      { title: "The Very Lonely Firefly", price: 7.99 },
+      { title: "From Head to Toe", price: 7.49 },
+      { title: "Pajama Time!", price: 7.99 },
+      { title: "Barnyard Dance!", price: 8.49 },
+      { title: "Moo, Baa, La La La!", price: 8.49 },
+      { title: "Chicka Chicka Boom Boom", price: 8.99 },
+      { title: "The Mitten", price: 7.49 },
+      { title: "Swimmy", price: 7.99 },
+      { title: "Frederick", price: 7.49 },
+      { title: "In the Small, Small Pond", price: 7.99 },
+      { title: "Not a Box", price: 6.99 },
+      { title: "Rosie Revere, Engineer", price: 8.99 },
+      { title: "Ada Twist, Scientist", price: 8.49 },
+      { title: "Iggy Peck, Architect", price: 8.99 },
+      { title: "Extra Yarn", price: 8.49 },
+      { title: "The Dark", price: 8.99 },
+      { title: "The Bad Beginning", price: 9.49 },
+      { title: "The Reptile Room", price: 9.99 },
+      { title: "The Wide Window", price: 9.49 },
+      { title: "The Miserable Mill", price: 9.99 },
+      { title: "The Ersatz Elevator", price: 9.49 },
+      { title: "The Hostile Hospital", price: 9.99 },
+      { title: "The Carnivorous Carnival", price: 9.49 },
+      { title: "The Slippery Slope", price: 9.99 },
+      { title: "The Grim Grotto", price: 9.49 },
+      { title: "The Penultimate Peril", price: 9.99 },
+      { title: "The End", price: 10.49 },
+      { title: "The Lion, the Witch and the Wardrobe", price: 10.99 },
+      { title: "Prince Caspian", price: 10.49 },
+      { title: "The Voyage of the Dawn Treader", price: 10.99 },
+      { title: "The Silver Chair", price: 10.49 },
+      { title: "We Love Our School", price: 8.99 },
+      { title: "The Big Honey Hunt", price: 8.49 },
+      { title: "The Little Engine That Could", price: 9.49 },
+      { title: "Curious George Goes to the Zoo", price: 9.49 },
+      { title: "Spot Goes to the Farm", price: 8.99 },
+      { title: "Where's Spot?", price: 8.49 },
+      { title: "Clifford the Big Red Dog", price: 9.99 },
+      { title: "Amelia Bedelia", price: 9.49 },
+      { title: "The Very Busy Spider", price: 8.99 },
+      { title: "Are You My Mother?", price: 8.49 }
+    ];
+    
+    // 100 Teen Books (real titles)
+    const teenBooks = [
+      { title: "Harry Potter and the Sorcerer's Stone", price: 12.99 },
+      { title: "Harry Potter and the Chamber of Secrets", price: 12.99 },
+      { title: "Harry Potter and the Prisoner of Azkaban", price: 13.49 },
+      { title: "Harry Potter and the Goblet of Fire", price: 13.99 },
+      { title: "Harry Potter and the Order of the Phoenix", price: 14.49 },
+      { title: "Harry Potter and the Half-Blood Prince", price: 14.99 },
+      { title: "Harry Potter and the Deathly Hallows", price: 15.49 },
+      { title: "The Hunger Games", price: 10.99 },
+      { title: "Catching Fire", price: 10.49 },
+      { title: "Mockingjay", price: 10.99 },
+      { title: "Divergent", price: 10.49 },
+      { title: "Insurgent", price: 10.49 },
+      { title: "Allegiant", price: 10.99 },
+      { title: "The Maze Runner", price: 11.99 },
+      { title: "The Scorch Trials", price: 11.49 },
+      { title: "The Death Cure", price: 12.49 },
+      { title: "The Fault in Our Stars", price: 9.49 },
+      { title: "Looking for Alaska", price: 9.49 },
+      { title: "Paper Towns", price: 9.49 },
+      { title: "An Abundance of Katherines", price: 9.99 },
+      { title: "Turtles All the Way Down", price: 10.99 },
+      { title: "Eleanor & Park", price: 9.99 },
+      { title: "Fangirl", price: 9.49 },
+      { title: "Simon vs. the Homo Sapiens Agenda", price: 9.49 },
+      { title: "If I Stay", price: 9.49 },
+      { title: "Thirteen Reasons Why", price: 8.99 },
+      { title: "The Perks of Being a Wallflower", price: 9.99 },
+      { title: "We Were Liars", price: 9.49 },
+      { title: "The Hate U Give", price: 10.49 },
+      { title: "Legend", price: 9.99 },
+      { title: "Prodigy", price: 9.49 },
+      { title: "Champion", price: 9.99 },
+      { title: "Red Queen", price: 10.49 },
+      { title: "Glass Sword", price: 10.49 },
+      { title: "Throne of Glass", price: 10.99 },
+      { title: "A Court of Thorns and Roses", price: 11.49 },
+      { title: "Shadow and Bone", price: 10.49 },
+      { title: "Six of Crows", price: 10.99 },
+      { title: "Crooked Kingdom", price: 10.99 },
+      { title: "Cinder", price: 10.49 },
+      { title: "Scarlet", price: 10.49 },
+      { title: "Cress", price: 10.49 },
+      { title: "Winter", price: 10.49 },
+      { title: "Fairest", price: 10.49 },
+      { title: "The 5th Wave", price: 11.49 },
+      { title: "The Infinite Sea", price: 11.49 },
+      { title: "The Last Star", price: 11.99 },
+      { title: "Uglies", price: 10.49 },
+      { title: "Pretties", price: 10.49 },
+      { title: "Specials", price: 10.49 },
+      { title: "Extras", price: 10.49 },
+      { title: "Matched", price: 9.99 },
+      { title: "Crossed", price: 9.99 },
+      { title: "Reached", price: 9.99 },
+      { title: "Delirium", price: 10.49 },
+      { title: "Fevers", price: 10.49 },
+      { title: "Lovesick", price: 10.49 },
+      { title: "Shatter Me", price: 10.99 },
+      { title: "Unravel Me", price: 10.99 },
+      { title: "Ignite Me", price: 10.99 },
+      { title: "Gone", price: 11.49 },
+      { title: "Hunger", price: 11.49 },
+      { title: "Lament", price: 11.49 },
+      { title: "The Knife of Never Letting Go", price: 12.49 },
+      { title: "Monsters of Men", price: 12.49 },
+      { title: "The Ask and the Answer", price: 12.49 },
+      { title: "The Darkest Minds", price: 11.49 },
+      { title: "The 100", price: 10.99 },
+      { title: "Across the Universe", price: 11.49 },
+      { title: "The Adoration of Jenna Fox", price: 10.99 },
+      { title: "The Giver", price: 9.99 },
+      { title: "Gathering Blue", price: 9.99 },
+      { title: "Messenger", price: 9.99 },
+      { title: "Son", price: 9.99 },
+      { title: "Ender's Game", price: 10.99 },
+      { title: "Speaker for the Dead", price: 10.99 },
+      { title: "The Outsiders", price: 9.49 },
+      { title: "That Was Then, This Is Now", price: 9.49 },
+      { title: "Rumble Fish", price: 9.49 },
+      { title: "The Chocolate War", price: 9.99 },
+      { title: "I Am the Cheese", price: 9.49 },
+      { title: "The House of Dies Drear", price: 10.49 },
+      { title: "Walk Two Moons", price: 10.49 },
+      { title: "Bridge to Terabithia", price: 9.99 },
+      { title: "Jacob Have I Loved", price: 10.49 },
+      { title: "The Yearling", price: 10.99 },
+      { title: "Hatchet", price: 10.49 },
+      { title: "My Side of the Mountain", price: 9.99 }
+    ];
+    
+    // DOM Elements for each category and the cart
+    const bookListKids = document.getElementById('book-list-kids');
+    const bookListTeens = document.getElementById('book-list-teens');
+    const bookListAdults = document.getElementById('book-list-adults');
+    const countKids = document.getElementById('count-kids');
+    const countTeens = document.getElementById('count-teens');
+    const countAdults = document.getElementById('count-adults');
+    const cart = document.getElementById('cart');
+    const totalPriceElement = document.getElementById('total-price');
+    const checkoutBtn = document.getElementById('checkout-btn');
+    let cartItems = [];
+    let totalPrice = 0;
+    
+    // Global search function using the global search bar
+    function searchBooks() {
+      const query = document.getElementById('search-bar').value.toLowerCase();
+      const filteredKids = kidsBooks.filter(book => book.title.toLowerCase().includes(query));
+      const filteredTeens = teenBooks.filter(book => book.title.toLowerCase().includes(query));
+      const filteredAdults = adultBooks.filter(book => book.title.toLowerCase().includes(query));
+      renderBooks(filteredKids, bookListKids, countKids);
+      renderBooks(filteredTeens, bookListTeens, countTeens);
+      renderBooks(filteredAdults, bookListAdults, countAdults);
+    }
+    
+    function renderBooks(books, container, countElement) {
+      container.innerHTML = '';
+      books.forEach(book => {
+        const bookElement = document.createElement('div');
+        bookElement.classList.add('book');
+        bookElement.innerHTML = `
+          <img src="https://via.placeholder.com/150x200?text=${encodeURIComponent(book.title)}" alt="${book.title}">
+          <div class="book-title">${book.title}</div>
+          <div class="book-price">$${book.price.toFixed(2)}</div>
+          <button class="add-to-cart" onclick="addToCart('${book.title}', ${book.price})">Add to Cart</button>
+        `;
+        container.appendChild(bookElement);
+      });
+      countElement.textContent = books.length;
+    }
+    
+    function addToCart(title, price) {
+      const book = { title, price };
+      cartItems.push(book);
+      totalPrice += price;
+      updateCart();
+    }
+    
+    function updateCart() {
+      cart.innerHTML = '';
+      if (cartItems.length === 0) {
+        cart.innerHTML = '<p>No items in the cart.</p>';
+        checkoutBtn.style.display = 'none';
+      } else {
+        cartItems.forEach((item, index) => {
+          const cartItem = document.createElement('div');
+          cartItem.classList.add('cart-item');
+          cartItem.innerHTML = `<span>${item.title}</span><span>$${item.price.toFixed(2)}</span>
+            <button class="remove-btn" onclick="removeFromCart(${index})">Remove</button>`;
+          cart.appendChild(cartItem);
+        });
+        checkoutBtn.style.display = 'block';
+      }
+      totalPriceElement.textContent = totalPrice.toFixed(2);
+    }
+    
+    function removeFromCart(index) {
+      totalPrice -= cartItems[index].price;
+      cartItems.splice(index, 1);
+      updateCart();
+    }
+    
+    // Initial rendering of all books
+    renderBooks(kidsBooks, bookListKids, countKids);
+    renderBooks(teenBooks, bookListTeens, countTeens);
+    renderBooks(adultBooks, bookListAdults, countAdults);
+    
+    // --- Saved Cards Modal Functions ---
+    function openSavedCardsModal() {
+      document.getElementById('savedCardsModal').style.display = 'block';
+    }
+    function closeSavedCardsModal() {
+      document.getElementById('savedCardsModal').style.display = 'none';
+    }
+    
+    // Handle saving card info when the form is submitted
+    document.getElementById('cardForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Gather card information from the form
+      const cardholder = document.getElementById('cardholder').value;
+      const cardNumber = document.getElementById('cardNumber').value;
+      const expiry = document.getElementById('expiry').value;
+      const cvv = document.getElementById('cvv').value;
+      
+      // WARNING: Storing sensitive card information in localStorage is NOT secure.
+      // This is for demonstration purposes only.
+      let savedCards = JSON.parse(localStorage.getItem('savedCards')) || [];
+      savedCards.push({ cardholder, cardNumber, expiry, cvv });
+      localStorage.setItem('savedCards', JSON.stringify(savedCards));
+      
+      alert('Card info saved successfully!');
+      closeSavedCardsModal();
+    });
+  </script>
+</body>
+</html>
