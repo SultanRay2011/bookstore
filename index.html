@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home - Bookstore</title>
+  <link href="https://fonts.googleapis.com/css?family=Arial&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(45deg, #ff5f6d, #ffc371, #00c6ff, #0072ff);
+      background-size: 400% 400%;
+      animation: gradientAnimation 15s ease infinite;
+    }
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+    header h3 a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.8em;
+    }
+    header img {
+      max-width: 80px;
+      height: auto;
+    }
+    .search-bar {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+    }
+    .search-bar input {
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      width: 200px;
+      outline: none;
+    }
+    .search-bar button {
+      padding: 10px;
+      margin-left: 5px;
+      border: none;
+      border-radius: 4px;
+      background-color: #fff;
+      color: #333;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    .search-bar button:hover {
+      background-color: #ddd;
+    }
+    .saved-cards button {
+      padding: 10px 15px;
+      margin: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background-color 0.3s;
+    }
+    .saved-cards button:hover {
+      background-color: #0056b3;
+    }
+    /* Donate button styled as orange */
+    .donate button {
+      padding: 10px 15px;
+      background-color: #ff6600;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background-color 0.3s;
+    }
+    .donate button:hover {
+      background-color: #e65c00;
+    }
+    nav {
+      margin-top: 10px;
+    }
+    nav a {
+      margin: 0 15px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #ffeb3b;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    h1.main-title {
+      text-align: center;
+      margin: 20px 0;
+      font-size: 2em;
+      color: #333;
+      text-shadow: 1px 1px 2px #fff;
+    }
+    .navigation-buttons {
+      text-align: center;
+      margin: 20px 0;
+    }
+    #goToEndBtn {
+      padding: 10px 20px;
+      background-color: #007BFF; /* Blue background */
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background-color 0.3s;
+    }
+    #goToEndBtn:hover {
+      background-color: #0056b3;
+    }
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 5px;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      color: #555;
+    }
+    .book-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .book {
+      width: 200px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      overflow: hidden;
+      text-align: center;
+      background: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .book img {
+      max-width: 100%;
+      height: auto;
+    }
+    .book-title {
+      font-size: 1.1em;
+      padding: 10px 0;
+    }
+    .book-price {
+      color: #333;
+      font-weight: bold;
+      padding-bottom: 10px;
+    }
+    .add-to-cart-btn {
+      background-color: #4CAF50; /* Green background */
+      color: white;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background-color 0.3s;
+      border-radius: 0 0 5px 5px;
+      display: block;
+    }
+    .add-to-cart-btn:hover {
+      background-color: #45a049;
+    }
+    #goToStartBtn {
+      display: block;
+      margin: 20px auto 10px;
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background-color 0.3s;
+    }
+    #goToStartBtn:hover {
+      background-color: #0056b3;
+    }
+    .cart {
+      margin-top: 30px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      background: #f9f9f9;
+    }
+    .cart h2 {
+      margin-bottom: 10px;
+    }
+    .cart-total {
+      text-align: right;
+      font-size: 1.2em;
+      margin-top: 10px;
+    }
+    .checkout-btn {
+      margin-top: 20px;
+      background-color: #007BFF;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .checkout-btn:hover {
+      background-color: #0056b3;
+    }
+    footer {
+      text-align: center;
+      padding: 15px 0;
+      background-color: #4CAF50;
+      color: white;
+      margin-top: 30px;
+    }
+    footer a {
+      color: white;
+      text-decoration: none;
+      margin: 0 5px;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h3><a href="index.html">Bookstore</a></h3>
+      <img src="favicon.png" alt="Bookstore">
+    </div>
+    <div class="search-bar">
+      <input type="text" id="search-bar" placeholder="Search for books...">
+      <button onclick="searchBooks()">Search</button>
+    </div>
+    <div class="saved-cards">
+      <button onclick="openSavedCardsModal()">Saved Cards</button>
+    </div>
+    <div class="donate">
+      <button onclick="window.location.href='donate.html'">Donate</button>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="feedback.html">Feedback</a>
+      <a href="author.html">Authors</a>
+      <a href="oscarawards.html">Oscar Awards</a>
+    </nav>
+  </header>
+  
+  <div class="container">
+    <!-- Navigation Buttons -->
+    <div class="navigation-buttons">
+      <button id="goToEndBtn" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})">Go to end of page</button>
+    </div>
+    
+    <h1 class="main-title">Your Number 1 Best Rated Book Shop Used by Over 1 Million People</h1>
+    
+    <!-- Kids Books Section -->
+    <div class="section-heading">
+      <span>Stories and Novels for Kids</span>
+      <span class="count" id="count-kids"></span>
+    </div>
+    <div class="book-list" id="book-list-kids">
+      <!-- 50 Kids books will be rendered here -->
+    </div>
+    
+    <!-- Teen Books Section -->
+    <div class="section-heading">
+      <span>Stories and Novels for Teens</span>
+      <span class="count" id="count-teens"></span>
+    </div>
+    <div class="book-list" id="book-list-teens">
+      <!-- 50 Teen books will be rendered here -->
+    </div>
+    
+    <!-- Adult Books Section -->
+    <div class="section-heading">
+      <span>Stories and Novels for Adults</span>
+      <span class="count" id="count-adults"></span>
+    </div>
+    <div class="book-list" id="book-list-adults">
+      <!-- 50 Adult books will be rendered here -->
+    </div>
+    
+    <!-- "Go to start of page" Button -->
+    <button id="goToStartBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Go to start of page</button>
+    
+    <!-- Shopping Cart Section -->
+    <section class="cart">
+      <h2>Your Shopping Cart</h2>
+      <div id="cart">
+        <p>No items in the cart.</p>
+      </div>
+      <div class="cart-total">
+        <span>Total:</span> $<span id="total-price">0.00</span>
+      </div>
+      <button class="checkout-btn" id="checkout-btn" onclick="window.location.href='checkout.html'">
+        Proceed to Checkout
+      </button>
+    </section>
+  </div>
+  
+  <footer>
+    <p>&copy; Bookstore Enterprise Limited 2025</p>
+  </footer>
+  
+  <script>
+    // Kids Books – 50 real titles (only book titles, no author names)
+    const kidsBooks = [
+      { title: "Matilda", price: "8.99", image: "images/kidsbook.jpg" },
+      { title: "Charlie and the Chocolate Factory", price: "9.99", image: "images/kidsbook.jpg" },
+      { title: "James and the Giant Peach", price: "7.99", image: "images/kidsbook.jpg" },
+      { title: "The BFG", price: "8.49", image: "images/kidsbook.jpg" },
+      { title: "The Witches", price: "9.49", image: "images/kidsbook.jpg" },
+      { title: "Fantastic Mr Fox", price: "7.49", image: "images/kidsbook.jpg" },
+      { title: "Where the Wild Things Are", price: "8.99", image: "images/kidsbook.jpg" },
+      { title: "Goodnight Moon", price: "8.49", image: "images/kidsbook.jpg" },
+      { title: "The Very Hungry Caterpillar", price: "6.99", image: "images/kidsbook.jpg" },
+      { title: "Green Eggs and Ham", price: "8.99", image: "images/kidsbook.jpg" },
+      { title: "The Cat in the Hat", price: "8.49", image: "images/kidsbook.jpg" },
+      { title: "Curious George", price: "7.99", image: "images/kidsbook.jpg" },
+      { title: "The Giving Tree", price: "7.49", image: "images/kidsbook.jpg" },
+      { title: "Charlotte's Web", price: "9.99", image: "images/kidsbook.jpg" },
+      { title: "The Tale of Peter Rabbit", price: "6.99", image: "images/kidsbook.jpg" },
+      { title: "Winnie-the-Pooh", price: "8.99", image: "images/kidsbook.jpg" },
+      { title: "The Gruffalo", price: "7.99", image: "images/kidsbook.jpg" },
+      { title: "The Snowy Day", price: "7.49", image: "images/kidsbook.jpg" },
+      { title: "Oh, the Places You'll Go!", price: "9.49", image: "images/kidsbook.jpg" },
+      { title: "The Polar Express", price: "8.99", image: "images/kidsbook.jpg" },
+      { title: "Alexander and the Terrible, Horrible, No Good, Very Bad Day", price: "8.49", image: "images/kidsbook.jpg" },
+      { title: "Where's Spot?", price: "7.99", image: "images/kidsbook.jpg" },
+      { title: "Brown Bear, Brown Bear, What Do You See?", price: "7.49", image: "images/kidsbook.jpg" },
+      { title: "Chicka Chicka Boom Boom", price: "8.49", image: "images/kidsbook.jpg" },
+      { title: "The Little Engine That Could", price: "8.99", image: "images/kidsbook.jpg" },
+      { title: "Corduroy", price: "7.99", image: "images/kidsbook.jpg" },
+      { title: "Madeline", price: "7.49", image: "images/kidsbook.jpg" },
+      { title: "Don't Let the Pigeon Drive the Bus!", price: "8.99", image: "images/kidsbook.jpg" },
+      { title: "Harold and the Purple Crayon", price: "7.99", image: "images/kidsbook.jpg" },
+      { title: "The Tale of Benjamin Bunny", price: "6.99", image: "images/kidsbook.jpg" },
+      { title: "The Tale of Jemima Puddle-Duck", price: "6.99", image: "images/kidsbook.jpg" },
+      { title: "The Tale of Tom Kitten", price: "6.49", image: "images/kidsbook.jpg" },
+      { title: "The Lorax", price: "8.49", image: "images/kidsbook.jpg" },
+      { title: "Hop on Pop", price: "7.49", image: "images/kidsbook.jpg" },
+      { title: "One Fish Two Fish, Red Fish Blue Fish", price: "8.49", image: "images/kidsbook.jpg" },
+      { title: "Frog and Toad Are Friends", price: "7.99", image: "images/kidsbook.jpg" },
+      { title: "Frog and Toad Together", price: "7.99", image: "images/kidsbook.jpg" },
+      { title: "Make Way for Ducklings", price: "8.99", image: "images/kidsbook.jpg" },
+      { title: "Stellaluna", price: "7.49", image: "images/kidsbook.jpg" },
+      { title: "Knuffle Bunny", price: "7.99", image: "images/kidsbook.jpg" },
+      { title: "The Runaway Bunny", price: "8.49", image: "images/kidsbook.jpg" },
+      { title: "If You Give a Mouse a Cookie", price: "7.99", image: "images/kidsbook.jpg" },
+      { title: "Diary of a Wimpy Kid", price: "8.99", image: "images/kidsbook.jpg" },
+      { title: "Where the Sidewalk Ends", price: "7.49", image: "images/kidsbook.jpg" },
+      { title: "The Gruffalo's Child", price: "8.49", image: "images/kidsbook.jpg" },
+      { title: "I Want My Hat Back", price: "7.99", image: "images/kidsbook.jpg" },
+      { title: "Press Here", price: "6.99", image: "images/kidsbook.jpg" },
+      { title: "Don't Let the Pigeon Stay Up Late!", price: "7.49", image: "images/kidsbook.jpg" },
+      { title: "The Very Busy Spider", price: "8.49", image: "images/kidsbook.jpg" },
+      { title: "Owl at Home", price: "7.99", image: "images/kidsbook.jpg" }
+    ];
+    
+    // Teen Books – 50 real titles (Young Adult)
+    const teenBooks = [
+      { title: "Harry Potter and the Sorcerer's Stone", price: "12.99", image: "images/teenbook.jpg" },
+      { title: "Harry Potter and the Chamber of Secrets", price: "12.99", image: "images/teenbook.jpg" },
+      { title: "Harry Potter and the Prisoner of Azkaban", price: "13.49", image: "images/teenbook.jpg" },
+      { title: "Harry Potter and the Goblet of Fire", price: "13.99", image: "images/teenbook.jpg" },
+      { title: "Harry Potter and the Order of the Phoenix", price: "14.49", image: "images/teenbook.jpg" },
+      { title: "Harry Potter and the Half-Blood Prince", price: "14.99", image: "images/teenbook.jpg" },
+      { title: "Harry Potter and the Deathly Hallows", price: "15.49", image: "images/teenbook.jpg" },
+      { title: "The Hunger Games", price: "10.99", image: "images/teenbook.jpg" },
+      { title: "Catching Fire", price: "10.49", image: "images/teenbook.jpg" },
+      { title: "Mockingjay", price: "10.99", image: "images/teenbook.jpg" },
+      { title: "Divergent", price: "10.49", image: "images/teenbook.jpg" },
+      { title: "Insurgent", price: "10.49", image: "images/teenbook.jpg" },
+      { title: "Allegiant", price: "10.99", image: "images/teenbook.jpg" },
+      { title: "The Maze Runner", price: "11.99", image: "images/teenbook.jpg" },
+      { title: "The Scorch Trials", price: "11.49", image: "images/teenbook.jpg" },
+      { title: "The Death Cure", price: "12.49", image: "images/teenbook.jpg" },
+      { title: "The Fault in Our Stars", price: "9.49", image: "images/teenbook.jpg" },
+      { title: "Looking for Alaska", price: "9.49", image: "images/teenbook.jpg" },
+      { title: "Paper Towns", price: "9.49", image: "images/teenbook.jpg" },
+      { title: "The Perks of Being a Wallflower", price: "9.99", image: "images/teenbook.jpg" },
+      { title: "Thirteen Reasons Why", price: "8.99", image: "images/teenbook.jpg" },
+      { title: "Twilight", price: "9.99", image: "images/teenbook.jpg" },
+      { title: "New Moon", price: "9.99", image: "images/teenbook.jpg" },
+      { title: "Eclipse", price: "9.49", image: "images/teenbook.jpg" },
+      { title: "Breaking Dawn", price: "9.99", image: "images/teenbook.jpg" },
+      { title: "The Outsiders", price: "9.49", image: "images/teenbook.jpg" },
+      { title: "Speak", price: "8.99", image: "images/teenbook.jpg" },
+      { title: "Eleanor & Park", price: "9.99", image: "images/teenbook.jpg" },
+      { title: "If I Stay", price: "9.49", image: "images/teenbook.jpg" },
+      { title: "Fangirl", price: "9.49", image: "images/teenbook.jpg" },
+      { title: "Simon vs. the Homo Sapiens Agenda", price: "9.49", image: "images/teenbook.jpg" },
+      { title: "Wonder", price: "9.99", image: "images/teenbook.jpg" },
+      { title: "The Giver", price: "9.99", image: "images/teenbook.jpg" },
+      { title: "Uglies", price: "10.49", image: "images/teenbook.jpg" },
+      { title: "Pretties", price: "10.49", image: "images/teenbook.jpg" },
+      { title: "The Absolutely True Diary of a Part-Time Indian", price: "9.99", image: "images/teenbook.jpg" },
+      { title: "The Hate U Give", price: "9.99", image: "images/teenbook.jpg" },
+      { title: "An Abundance of Katherines", price: "9.49", image: "images/teenbook.jpg" },
+      { title: "The Curious Incident of the Dog in the Night-Time", price: "9.99", image: "images/teenbook.jpg" },
+      { title: "Miss Peregrine's Home for Peculiar Children", price: "9.99", image: "images/teenbook.jpg" },
+      { title: "The Book Thief", price: "10.49", image: "images/teenbook.jpg" },
+      { title: "Cinder", price: "10.49", image: "images/teenbook.jpg" },
+      { title: "Matched", price: "9.99", image: "images/teenbook.jpg" },
+      { title: "Delirium", price: "10.49", image: "images/teenbook.jpg" },
+      { title: "Shatter Me", price: "10.99", image: "images/teenbook.jpg" },
+      { title: "Legend", price: "10.99", image: "images/teenbook.jpg" },
+      { title: "Red Queen", price: "10.49", image: "images/teenbook.jpg" },
+      { title: "An Ember in the Ashes", price: "10.49", image: "images/teenbook.jpg" },
+      { title: "Caraval", price: "10.99", image: "images/teenbook.jpg" },
+      { title: "One of Us Is Lying", price: "10.99", image: "images/teenbook.jpg" }
+    ];
+    
+    // Adult Books – 50 real titles for adults
+    const adultBooks = [
+      { title: "The Da Vinci Code", price: "9.99", image: "images/adultbook.jpg" },
+      { title: "Gone Girl", price: "11.99", image: "images/adultbook.jpg" },
+      { title: "The Girl on the Train", price: "10.49", image: "images/adultbook.jpg" },
+      { title: "The Alchemist", price: "9.99", image: "images/adultbook.jpg" },
+      { title: "To Kill a Mockingbird", price: "9.99", image: "images/adultbook.jpg" },
+      { title: "1984", price: "8.99", image: "images/adultbook.jpg" },
+      { title: "The Catcher in the Rye", price: "9.49", image: "images/adultbook.jpg" },
+      { title: "Pride and Prejudice", price: "9.99", image: "images/adultbook.jpg" },
+      { title: "The Great Gatsby", price: "9.49", image: "images/adultbook.jpg" },
+      { title: "Moby Dick", price: "10.99", image: "images/adultbook.jpg" },
+      { title: "War and Peace", price: "12.99", image: "images/adultbook.jpg" },
+      { title: "Crime and Punishment", price: "11.99", image: "images/adultbook.jpg" },
+      { title: "The Kite Runner", price: "10.99", image: "images/adultbook.jpg" },
+      { title: "Life of Pi", price: "10.49", image: "images/adultbook.jpg" },
+      { title: "The Road", price: "9.99", image: "images/adultbook.jpg" },
+      { title: "A Game of Thrones", price: "14.99", image: "images/adultbook.jpg" },
+      { title: "The Handmaid's Tale", price: "10.99", image: "images/adultbook.jpg" },
+      { title: "The Shining", price: "9.99", image: "images/adultbook.jpg" },
+      { title: "It", price: "10.99", image: "images/adultbook.jpg" },
+      { title: "The Stand", price: "11.49", image: "images/adultbook.jpg" },
+      { title: "One Hundred Years of Solitude", price: "12.99", image: "images/adultbook.jpg" },
+      { title: "The Color Purple", price: "10.99", image: "images/adultbook.jpg" },
+      { title: "Beloved", price: "10.49", image: "images/adultbook.jpg" },
+      { title: "Slaughterhouse-Five", price: "9.99", image: "images/adultbook.jpg" },
+      { title: "The Grapes of Wrath", price: "11.99", image: "images/adultbook.jpg" },
+      { title: "The Bell Jar", price: "9.99", image: "images/adultbook.jpg" },
+      { title: "The Poisonwood Bible", price: "10.49", image: "images/adultbook.jpg" },
+      { title: "The Secret History", price: "10.99", image: "images/adultbook.jpg" },
+      { title: "The Goldfinch", price: "11.49", image: "images/adultbook.jpg" },
+      { title: "The Lovely Bones", price: "10.99", image: "images/adultbook.jpg" },
+      { title: "Middlesex", price: "11.99", image: "images/adultbook.jpg" },
+      { title: "The Corrections", price: "10.99", image: "images/adultbook.jpg" },
+      { title: "American Gods", price: "11.49", image: "images/adultbook.jpg" },
+      { title: "The Time Traveler's Wife", price: "10.99", image: "images/adultbook.jpg" },
+      { title: "A Thousand Splendid Suns", price: "10.99", image: "images/adultbook.jpg" },
+      { title: "Memoirs of a Geisha", price: "11.49", image: "images/adultbook.jpg" },
+      { title: "The Road to Character", price: "10.99", image: "images/adultbook.jpg" },
+      { title: "The Immortal Life of Henrietta Lacks", price: "10.99", image: "images/adultbook.jpg" },
+      { title: "Sapiens: A Brief History of Humankind", price: "11.49", image: "images/adultbook.jpg" },
+      { title: "Educated", price: "10.99", image: "images/adultbook.jpg" },
+      { title: "The Silent Patient", price: "11.49", image: "images/adultbook.jpg" },
+      { title: "Normal People", price: "10.99", image: "images/adultbook.jpg" },
+      { title: "Where the Crawdads Sing", price: "11.49", image: "images/adultbooks.jpg" }
+    ];
+    
+    // Global cart array to hold added items
+    let cartItems = [];
+    
+    // Function to render books in a given container and update count
+    function renderBooks(bookArray, containerId, countId) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = "";
+      bookArray.forEach(book => {
+        const bookDiv = document.createElement("div");
+        bookDiv.classList.add("book");
+        bookDiv.innerHTML = `
+          <img src="${book.image}" alt="${book.title}">
+          <div class="book-title">${book.title}</div>
+          <div class="book-price">$${book.price}</div>
+          <button class="add-to-cart-btn" onclick='addToCart(${JSON.stringify(book)})'>Add to Cart</button>
+        `;
+        container.appendChild(bookDiv);
+      });
+      // Update the count display
+      document.getElementById(countId).textContent = bookArray.length;
+    }
+    
+    // Function to add a book to the cart
+    function addToCart(book) {
+      cartItems.push(book);
+      updateCartDisplay();
+      alert(`${book.title} has been added to your cart.`);
+    }
+    
+    // Function to update the cart display and total price
+    function updateCartDisplay() {
+      const cartContainer = document.getElementById("cart");
+      cartContainer.innerHTML = "";
+      let total = 0;
+      cartItems.forEach((item, index) => {
+        total += parseFloat(item.price);
+        const itemDiv = document.createElement("div");
+        itemDiv.innerHTML = `${item.title} - $${item.price}`;
+        cartContainer.appendChild(itemDiv);
+      });
+      document.getElementById("total-price").textContent = total.toFixed(2);
+    }
+    
+    // Render the books for each section
+    renderBooks(kidsBooks, "book-list-kids", "count-kids");
+    renderBooks(teenBooks, "book-list-teens", "count-teens");
+    renderBooks(adultBooks, "book-list-adults", "count-adults");
+    
+    // Dummy functions for searchBooks and openSavedCardsModal if not already defined
+    function searchBooks() {
+      alert("Search functionality coming soon!");
+    }
+    
+    function openSavedCardsModal() {
+      alert("Saved Cards modal coming soon!");
+    }
+  </script>
+</body>
+</html>

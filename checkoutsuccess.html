@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout Success - Bookstore</title>
+  <link href="https://fonts.googleapis.com/css?family=Arial&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+    /* Use your specified font family */
+    body {
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+    /* Header styling */
+    header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h3 a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.8em;
+    }
+    header img {
+      max-width: 80px;
+      height: auto;
+    }
+    nav {
+      margin-top: 10px;
+    }
+    nav a {
+      margin: 0 15px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #ffeb3b;
+    }
+    /* Container styling */
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+    p {
+      font-size: 1.1em;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    /* Delivery Options */
+    .delivery-options {
+      margin: 20px 0;
+      text-align: left;
+    }
+    .delivery-options label {
+      font-weight: bold;
+      margin-right: 15px;
+    }
+    /* Delivery form for "Deliver to home" option */
+    .delivery-form {
+      display: none;
+      margin-top: 20px;
+      text-align: left;
+    }
+    .delivery-form input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+    .delivery-form button {
+      padding: 10px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    .delivery-form button:hover {
+      background-color: #0056b3;
+    }
+    /* Final Submit button */
+    .submit-btn {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    .submit-btn:hover {
+      background-color: #45a049;
+    }
+    /* Footer styling */
+    footer {
+      text-align: center;
+      padding: 15px 0;
+      background-color: #4CAF50;
+      color: white;
+      margin-top: 30px;
+    }
+    footer a {
+      color: white;
+      text-decoration: none;
+      margin: 0 5px;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+    /* Offline banner styling */
+    #offlineBanner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: red;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      z-index: 2000;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header with Navigation -->
+  <header>
+    <div>
+      <h3><a href="home.html">Bookstore</a></h3>
+      <img src="favicon.png" alt="Bookstore">
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="feedback.html">Feedback</a>
+      <a href="author.html">Authors</a>
+      <a href="oscarawards.html">Oscar Awards</a>
+    </nav>
+  </header>
+  
+  <!-- Main Container -->
+  <div class="container">
+    <h1>Checkout Successful!</h1>
+    <p>Please choose your delivery option:</p>
+    
+    <div class="delivery-options">
+      <label>
+        <input type="radio" name="deliveryOption" value="pickup" onclick="toggleDeliveryOptions()"> Pick up from delivery station
+      </label>
+      <label>
+        <input type="radio" name="deliveryOption" value="delivery" onclick="toggleDeliveryOptions()"> Deliver to home
+      </label>
+    </div>
+    
+    <!-- Delivery form appears only if "Deliver to home" is chosen -->
+    <div class="delivery-form" id="deliveryForm">
+      <p>Enter your email address for delivery confirmation:</p>
+      <input type="email" id="deliveryEmail" placeholder="Enter Home Address">
+      <button type="button" onclick="useMyAddress()">Use my address</button>
+    </div>
+    
+    <button class="submit-btn" onclick="submitDelivery()">Submit Delivery Option</button>
+  </div>
+  
+  <footer>
+    <p>&copy; Bookstore Enterprise Limited 2025. <a href="privacypolicy.html">Privacy Policy</a> | <a href="availability.html">Available Countries</a></p>
+  </footer>
+  
+  <script>
+    // Toggle the display of the delivery form based on the selected delivery option.
+    function toggleDeliveryOptions() {
+      const selectedOption = document.querySelector('input[name="deliveryOption"]:checked').value;
+      const deliveryForm = document.getElementById('deliveryForm');
+      if (selectedOption === "delivery") {
+        deliveryForm.style.display = "block";
+      } else {
+        deliveryForm.style.display = "none";
+      }
+    }
+    
+    // Use Geolocation API to retrieve the user's address (for demonstration, it just alerts the coordinates).
+    function useMyAddress() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          alert("Detected location: " + position.coords.latitude + ", " + position.coords.longitude);
+          // Here you could use reverse geocoding to convert coordinates to an address.
+        }, function(error) {
+          alert("Error retrieving location: " + error.message);
+        });
+      } else {
+        alert("Geolocation is not supported by this browser.");
+      }
+    }
+    
+    // Process the selected delivery option.
+    function submitDelivery() {
+      const selectedOption = document.querySelector('input[name="deliveryOption"]:checked');
+      if (!selectedOption) {
+        alert("Please select a delivery option.");
+        return;
+      }
+      if (selectedOption.value === "pickup") {
+        alert("You chose to pick up your order from our delivery station.");
+        // Process pickup option...
+      } else if (selectedOption.value === "delivery") {
+        const email = document.getElementById('deliveryEmail').value;
+        if (!email) {
+          alert("Please enter your email address or use your current address.");
+          return;
+        }
+        alert("Delivery option selected. Confirmation will be sent to " + email);
+        // Process delivery option...
+      }
+    }
+    
+    // Offline detection: Show banner when offline, remove when online.
+    window.addEventListener('offline', function() {
+      if (!document.getElementById('offlineBanner')) {
+        const banner = document.createElement('div');
+        banner.id = 'offlineBanner';
+        banner.innerText = 'No internet connection detected. Please check your connection.';
+        document.body.appendChild(banner);
+      }
+    });
+    window.addEventListener('online', function() {
+      const banner = document.getElementById('offlineBanner');
+      if (banner) {
+        banner.remove();
+      }
+    });
+  </script>
+</body>
+</html>

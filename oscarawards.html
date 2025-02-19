@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oscar Awards - Best Seller Books</title>
+  <link href="https://fonts.googleapis.com/css?family=Arial&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+    /* Animated Gradient Background */
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    body {
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(45deg, #ff5f6d, #ffc371, #00c6ff, #0072ff);
+      background-size: 400% 400%;
+      animation: gradientAnimation 15s ease infinite;
+    }
+    header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h3 a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.8em;
+    }
+    header img {
+      max-width: 80px;
+      height: auto;
+    }
+    nav {
+      margin-top: 10px;
+    }
+    nav a {
+      margin: 0 15px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #ffeb3b;
+    }
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #333;
+    }
+    p {
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+    ul.award-list {
+      list-style: disc inside;
+      color: #555;
+      line-height: 1.6;
+      font-size: 1.1em;
+      padding: 0;
+      margin: 20px 0;
+    }
+    ul.award-list li {
+      margin-bottom: 10px;
+    }
+    footer {
+      text-align: center;
+      padding: 15px 0;
+      background-color: #4CAF50;
+      color: white;
+      margin-top: 30px;
+    }
+    footer a {
+      color: white;
+      text-decoration: none;
+      margin: 0 5px;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 600px) {
+      .container {
+        margin: 20px;
+        padding: 20px;
+      }
+      header, footer {
+        padding: 15px;
+      }
+      nav a {
+        margin: 0 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h3><a href="home.html">Bookstore</a></h3>
+      <img src="favicon.png" alt="Bookstore">
+    </div>
+    <!-- Search bar removed for non-home pages -->
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="feedback.html">Feedback</a>
+      <a href="author.html">Authors</a>
+      <a href="oscarawards.html">Oscar Awards</a>
+    </nav>
+  </header>
+  <div class="container">
+    <h1>Oscar Awards - Best Seller Books</h1>
+    <p>
+      Celebrate the winners of the Best Seller Awards. Here are some of the books and authors that have earned our prestigious Oscar Award for Best Seller Books.
+    </p>
+    <ul class="award-list">
+      <li>The Da Vinci Code by Dan Brown</li>
+      <li>The Girl on the Train by Paula Hawkins</li>
+      <li>Gone Girl by Gillian Flynn</li>
+      <li>The Alchemist by Paulo Coelho</li>
+      <li>The Kite Runner by Khaled Hosseini</li>
+      <li>A Thousand Splendid Suns by Khaled Hosseini</li>
+      <li>Fifty Shades of Grey by E. L. James</li>
+      <li>The Hunger Games by Suzanne Collins</li>
+    </ul>
+  </div>
+  <footer>
+    <p>&copy; Bookstore Enterprise Limited 2025. <a href="privacypolicy.html">Privacy Policy</a> | <a href="availability.html">Available Countries</a></p>
+  </footer>
+  <script>
+    // Since search functionality is only on the home page, no search function is included here.
+  </script>
+</body>
+</html>

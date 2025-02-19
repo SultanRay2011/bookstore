@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Authors - Bookstore</title>
+  <link href="https://fonts.googleapis.com/css?family=Arial&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+    body {
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+    /* Header styling */
+    header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+    /* Navigation styling */
+    nav {
+      background-color: #367c39;
+      padding: 10px 0;
+      text-align: center;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #ffeb3b;
+    }
+    /* Search bar styling */
+    .search-container {
+      max-width: 800px;
+      margin: 20px auto;
+      text-align: center;
+    }
+    .search-container input[type="text"] {
+      padding: 10px;
+      width: 300px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+    .search-container button {
+      padding: 10px 20px;
+      margin-left: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4CAF50;
+      color: white;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .search-container button:hover {
+      background-color: #45a049;
+    }
+    /* Authors list styling */
+    .authors-list {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 0 20px;
+    }
+    .author {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      font-size: 1.1em;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header with site title -->
+  <header>
+    <h1>Bookstore Authors</h1>
+  </header>
+  
+  <!-- Navigation menu -->
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="feedback.html">Feedback</a>
+    <a href="author.html">Authors</a>
+    <a href="oscarawards.html">Oscar Awards</a>
+  </nav>
+  <!-- Search Bar -->
+  <div class="search-container">
+    <input type="text" id="authorSearch" placeholder="Search for authors..." />
+    <button onclick="searchAuthors()">Search</button>
+  </div>
+  
+  <!-- Authors List -->
+  <div class="authors-list" id="authorsList">
+    <!-- The list of authors will be rendered here -->
+  </div>
+  
+  <script>
+    // Expanded array of authors
+    const authors = [
+      "J.K. Rowling",
+      "George Orwell",
+      "J.R.R. Tolkien",
+      "Roald Dahl",
+      "Stephen King",
+      "Agatha Christie",
+      "Mark Twain",
+      "Ernest Hemingway",
+      "Jane Austen",
+      "Charles Dickens",
+      "William Shakespeare",
+      "Leo Tolstoy",
+      "Victor Hugo",
+      "F. Scott Fitzgerald",
+      "J.D. Salinger",
+      "Harper Lee",
+      "Oscar Wilde",
+      "Virginia Woolf",
+      "Toni Morrison",
+      "Gabriel García Márquez",
+      "Neil Gaiman",
+      "C.S. Lewis",
+      "Arthur Conan Doyle",
+      "Kurt Vonnegut",
+      "Edgar Allan Poe",
+      "H.G. Wells",
+      "Philip K. Dick",
+      "Douglas Adams",
+      "Margaret Atwood",
+      "Stephenie Meyer",
+      "John Steinbeck",
+      "Ian McEwan",
+      "Paulo Coelho",
+      "Dan Brown",
+      "John Grisham",
+      "Michael Crichton",
+      "Haruki Murakami",
+      "Isabel Allende",
+      "Zadie Smith",
+      "Kazuo Ishiguro",
+      "Chimamanda Ngozi Adichie",
+      "Fannie Flagg",
+      "Boris Pasternak",
+      "Simone de Beauvoir",
+      "Ralph Ellison",
+      "James Baldwin",
+      "E.M. Forster",
+      "George R.R. Martin",
+      "Cynthia Voigt",
+      "L.M. Montgomery",
+      "E.B. White",
+      "Dr. Seuss",
+      "Shel Silverstein",
+      "Jeff Kinney",
+      "Rick Riordan",
+      "Cornelia Funke",
+      "Kate DiCamillo",
+      "Judy Blume",
+      "Louis Sachar",
+      "R.L. Stine",
+      "Jeffrey Archer",
+      "Daniel Handler",
+      "Michael Moorcock",
+      "Neal Stephenson",
+      "Orson Scott Card",
+      "Iain M. Banks",
+      "Ursula K. Le Guin",
+      "Robert A. Heinlein",
+      "Frank Herbert",
+      "Terry Pratchett",
+      "John Scalzi",
+      "Andy Weir",
+      "Margaret Weis",
+      "Tracy Hickman",
+      "Robert Jordan",
+      "Brandon Sanderson",
+      "Jasper Fforde",
+      "David Mitchell",
+      "Salman Rushdie",
+      "Ian Fleming",
+      "Gillian Flynn",
+      "Stieg Larsson",
+      "Paula Hawkins",
+      "Celeste Ng",
+      "Ann Patchett",
+      "Roxane Gay",
+      "Douglas Coupland",
+      "E.L. James",
+      "Sally Rooney",
+      "Bret Easton Ellis",
+      "Hunter S. Thompson",
+      "Chuck Palahniuk",
+      "Donna Tartt",
+      "Yann Martel",
+      "Michael Chabon"
+    ];
+    
+    // Function to render authors in the list
+    function renderAuthors(list) {
+      const authorsDiv = document.getElementById('authorsList');
+      authorsDiv.innerHTML = "";
+      list.forEach(author => {
+        const div = document.createElement('div');
+        div.className = 'author';
+        div.textContent = author;
+        authorsDiv.appendChild(div);
+      });
+    }
+    
+    // Function to search through authors
+    function searchAuthors() {
+      const query = document.getElementById('authorSearch').value.toLowerCase();
+      const filtered = authors.filter(author => author.toLowerCase().includes(query));
+      renderAuthors(filtered);
+    }
+    
+    // Initial render of all authors
+    renderAuthors(authors);
+  </script>
+</body>
+</html>

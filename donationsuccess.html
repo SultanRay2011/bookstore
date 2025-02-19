@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donation Success - Bookstore</title>
+  <link href="https://fonts.googleapis.com/css?family=Arial&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+    /* Minimal styling consistent with your other pages */
+    body {
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h3 a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.8em;
+    }
+    header img {
+      max-width: 80px;
+      height: auto;
+    }
+    nav {
+      margin-top: 10px;
+    }
+    nav a {
+      margin: 0 15px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #ffeb3b;
+    }
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 1.1em;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    /* New form styling for donor details */
+    form {
+      margin-top: 20px;
+      text-align: left;
+    }
+    form label {
+      display: block;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    form input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-top: 20px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    footer {
+      text-align: center;
+      padding: 15px 0;
+      background-color: #4CAF50;
+      color: white;
+      margin-top: 30px;
+    }
+    footer a {
+      color: white;
+      text-decoration: none;
+      margin: 0 5px;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h3><a href="index.html">Bookstore</a></h3>
+      <img src="favicon.png" alt="Bookstore">
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="feedback.html">Feedback</a>
+      <a href="author.html">Authors</a>
+      <a href="oscarawards.html">Oscar Awards</a>
+      <a href="donate.html">Donate</a>
+    </nav>
+  </header>
+  <div class="container">
+    <h1>Donation Successful!</h1>
+    <p>Thank you for your generous donation. Please enter your details below:</p>
+    
+    <!-- Donor details form -->
+    <form>
+      <label for="donor-name">Name:</label>
+      <input type="text" id="donor-name" name="donor-name" placeholder="Enter your name" required>
+      
+      <label for="donor-card">Card Number:</label>
+      <input type="text" id="donor-card" name="donor-card" placeholder="Enter your card number" required>
+      
+      <label for="donor-expiry">Expiry Date:</label>
+      <input type="month" id="donor-expiry" name="donor-expiry" required>
+      
+      <label for="donor-cvv">CVV:</label>
+      <input type="password" id="donor-cvv" name="donor-cvv" placeholder="Enter CVV" required>
+      
+      <label for="donor-email">Email Address:</label>
+      <input type="email" id="donor-email" name="donor-email" placeholder="Enter your email" required>
+    </form>
+    
+    <button onclick="window.location.href='index.html'">Return to Home</button>
+  </div>
+  <footer>
+    <p>&copy; Bookstore Enterprise Limited 2025. <a href="privacypolicy.html">Privacy Policy</a> | <a href="availability.html">Available Countries</a></p>
+  </footer>
+</body>
+</html>
